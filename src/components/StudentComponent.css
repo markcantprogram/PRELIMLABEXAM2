@@ -12,6 +12,7 @@
   overflow: hidden;
 }
 
+/* Accent bar */
 .student-card::before {
   content: '';
   position: absolute;
@@ -38,6 +39,7 @@
   transform: scaleY(1);
 }
 
+/* Avatar */
 .student-card .avatar {
   flex: 0 0 64px;
   height: 64px;
@@ -58,21 +60,22 @@
   transform: scale(1.05);
 }
 
+/* Main content */
 .student-main {
-  flex: 1 1 auto;
-  min-width: 0;
+  flex: 1;
+  min-width: 0; /* REQUIRED for flex children */
 }
 
+/* Header row */
 .student-row {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
   gap: 0.75rem;
   flex-wrap: wrap;
 }
 
 .student-name {
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.5rem;
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -80,6 +83,7 @@
   word-break: break-word;
 }
 
+/* Badges */
 .badges {
   display: flex;
   gap: 0.5rem;
@@ -115,6 +119,7 @@
   border-color: #fde68a;
 }
 
+/* Details section */
 .student-details {
   margin-top: 0.75rem;
   padding-top: 0.75rem;
@@ -122,30 +127,24 @@
   color: var(--color-text-secondary);
   font-size: 0.875rem;
   line-height: 1.5;
-  animation: fadeIn var(--transition-base) ease-out;
 }
 
-/* When info is always shown (Students page), tighten spacing a bit */
-.student-card .student-details {
-  margin-top: 0.6rem;
-  padding-top: 0.6rem;
-}
-
+/* Meta info container */
 .student-meta {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
 }
 
+/* ✅ FIXED: flex layout prevents column collapse */
 .meta-row {
-  display: grid;
-  grid-template-columns: 90px minmax(0, 1fr);
-  align-items: start;
-  gap: 0.6rem;
-  min-width: 0;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
 }
 
 .meta-label {
-  text-align: left;
+  flex: 0 0 80px;
   font-weight: 700;
   font-size: 0.75rem;
   color: var(--color-text-muted);
@@ -153,31 +152,17 @@
   letter-spacing: 0.06em;
 }
 
+/* ✅ VALUE NEVER GOES VERTICAL */
 .meta-value {
+  flex: 1;
+  min-width: 0;
   color: var(--color-text-secondary);
-  text-decoration: none;
-  /* Allow wrapping on words (not single characters) so it's readable */
   white-space: normal;
   word-break: break-word;
-  overflow-wrap: anywhere;
-  overflow: visible;
-  text-overflow: unset;
-  line-height: 1.45;
-  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
-@media (max-width: 360px) {
-  .meta-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .meta-label {
-    flex: 0 0 auto;
-  }
-}
-
+/* Actions */
 .student-actions {
   display: flex;
   flex-direction: column;
@@ -205,49 +190,33 @@
   box-shadow: var(--shadow-sm);
 }
 
-.btn.small:active:not(:disabled) {
-  transform: translateY(0);
-}
-
 .btn.outline.small {
   background: transparent;
   border: 1px solid var(--color-border);
   color: var(--color-text-secondary);
 }
 
-.btn.outline.small:hover:not(:disabled) {
-  background: var(--color-bg-tertiary);
-  border-color: var(--color-text-secondary);
-  color: var(--color-text-primary);
-}
-
-.btn.small:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
+/* Mobile */
 @media (max-width: 640px) {
   .student-card {
     flex-direction: column;
     align-items: stretch;
     padding: 1rem;
   }
-  
+
   .student-card .avatar {
     align-self: center;
   }
-  
+
   .student-row {
     flex-direction: column;
-    align-items: flex-start;
   }
-  
+
   .student-actions {
     flex-direction: row;
     justify-content: flex-end;
-    margin-top: 0.5rem;
   }
-  
+
   .btn.small {
     flex: 1;
   }
